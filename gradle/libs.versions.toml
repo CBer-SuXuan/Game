@@ -1,0 +1,21 @@
+[versions]
+com-comphenix-protocol-protocollib = "5.0.0"
+io-papermc-paper-paper-api = "1.20.1-R0.1-SNAPSHOT"
+net-mineclick-core-global = "master"
+net-mineclick-core-messenger = "master"
+org-projectlombok-lombok = "1.18.30"
+org-spigotmc-spigot = "1.20.1-R0.1-SNAPSHOT"
+com-github-johnrengelman-shadow = "8.1.1"
+io-papermc-paperweight-userdev = "1.7.7"
+
+[libraries]
+com-comphenix-protocol-protocollib = { module = "com.comphenix.protocol:ProtocolLib", version.ref = "com-comphenix-protocol-protocollib" }
+io-papermc-paper-paper-api = { module = "io.papermc.paper:paper-api", version.ref = "io-papermc-paper-paper-api" }
+net-mineclick-core-global = { module = "net.mineclick.core:Global", version.ref = "net-mineclick-core-global" }
+net-mineclick-core-messenger = { module = "net.mineclick.core:Messenger", version.ref = "net-mineclick-core-messenger" }
+org-projectlombok-lombok = { module = "org.projectlombok:lombok", version.ref = "org-projectlombok-lombok" }
+org-spigotmc-spigot = { module = "org.spigotmc:spigot", version.ref = "org-spigotmc-spigot" }
+
+[plugins]
+com-github-johnrengelman-shadow = { id = "com.github.johnrengelman.shadow", version.ref = "com-github-johnrengelman-shadow" }
+io-papermc-paperweight-userdev = { id = "io.papermc.paperweight.userdev", version.ref = "io-papermc-paperweight-userdev" }

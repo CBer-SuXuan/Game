@@ -1,0 +1,50 @@
+image: gradle:8.12.1-jdk17
+
+# Tell Gradle to store its cache in .gradle folder within the project
+variables:
+  GRADLE_USER_HOME: .gradle
+
+cache:
+  paths:
+    - .gradle/wrapper
+    - .gradle/caches
+    - .gradle/build-cache
+
+stages:
+  - compile
+  - package
+  - release
+
+compile:
+  stage: compile
+  script:
+    # If the branch is protected, define a version property
+    - if [[ "$CI_COMMIT_REF_PROTECTED" == "true" ]]; then export GRADLE_ARGS="-Pversion=$CI_COMMIT_REF_NAME"; fi
+    # Clean and compile (or build) the project
+    - gradle $GRADLE_ARGS clean build --info
+
+# Deploy changes to the Maven repository
+package:
+  stage: package
+  script:
+    - export GRADLE_ARGS="-Pversion=$CI_COMMIT_REF_NAME"
+    # Publish to your Maven repository (e.g., GitLab package registry)
+    - gradle $GRADLE_ARGS clean publish
+  only:
+    refs:
+      - branches
+    variables:
+      - $CI_COMMIT_REF_PROTECTED == "true"
+
+# "release" stage to publish release artifacts manually
+release:
+  stage: release
+  script:
+    - export GRADLE_ARGS="-Pversion=${CI_COMMIT_REF_NAME}-release"
+    - gradle $GRADLE_ARGS clean publish
+  only:
+    refs:
+      - branches
+    variables:
+      - $CI_COMMIT_REF_PROTECTED == "true"
+  when: manual

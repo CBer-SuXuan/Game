@@ -1,0 +1,8 @@
+name: Game
+main: net.mineclick.game.Game
+version: 2.0
+author: MineClick
+api-version: 1.18
+depend:
+  - Global
+  - ProtocolLib
